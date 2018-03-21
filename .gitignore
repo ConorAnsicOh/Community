@@ -3,9 +3,11 @@
 
 ### Java ###
 # Compiled class file
+class
 *.class
 
 # Log file
+log
 *.log
 
 # BlueJ files
@@ -15,7 +17,6 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.ear
 *.zip
