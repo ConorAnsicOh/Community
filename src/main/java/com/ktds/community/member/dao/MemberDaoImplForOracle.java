@@ -26,6 +26,22 @@ public class MemberDaoImplForOracle extends SqlSessionDaoSupport implements Memb
 	public boolean deleteMember(int userId) {
 		return getSqlSession().selectOne("MemberDao.deleteMember", userId);
 	}
+
+	@Override
+	public String selectSalt(String email) {
+		return getSqlSession().selectOne("MemberDao.selectSalt", email);
+	}
+
+	@Override
+	public int selectCountMemberEamil(String email) {
+		return getSqlSession().selectOne("MemberDao.selectCountMemberEamil", email);
+	}
+
+	@Override
+	public int selectCountMemberNickname(String nickname) {
+		return getSqlSession().selectOne("MemberDao.selectCountMemberNickname", nickname);
+	}
+
 	
 	
 }

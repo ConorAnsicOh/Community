@@ -5,6 +5,18 @@
   <!-- 		인터페이스의 이름작성 -->
   <mapper namespace="MemberDao">
   
+  	<select id="selectCountMemberEamil"	parameterType="string"	resultType="_int">
+  		SELECT	COUNT(ID)
+  		FROM	MEMBER
+  		WHERE	EMAIL = #{email}
+  	</select>
+  	
+  	<select id="selectCountMemberNickname" parameterType="String" resultType="_int">
+  		SELECT	COUNT(ID)
+  		FROM	MEMBER
+  		WHERE	NICKNAME = #{nickname}
+  	</select>
+  
   	<insert id="insertMember" parameterType="MemberVO">
   		INSERT	INTO	MEMBER	(
   			ID
@@ -12,7 +24,7 @@
   			,	NICKNAME
   			,	PASSWORD
   			,	REGIST_DATE
-  		
+  			,	SALT
   		)
   		VALUES	(
   			MEMBER_ID_SEQ.NEXTVAL
@@ -20,19 +32,28 @@
   			,	#{nickname}
   			,	#{password}
   			,	SYSDATE
-  			
+  			,	#{salt}
   		)
   	
   	</insert>
   			<!-- MemberVO에있는 email, nickname, password를 넣어라. -->
   	
+  	<select id="selectSalt"	parameterType="string"	resultType="string">
+  		SELECT	NVL(SALT, '')
+  		FROM	MEMBER
+  		WHERE	EMAIL = #{email}
+  	</select>
+  	<!-- NVL = 널이라면. -->
+  	
+  	
   	<!-- 적어 넣을것. -->
   	<select id="selectMember" parameterType="MemberVO" resultType="MemberVO">
   	
   		SELECT	ID
-  				, EMAIL
-  				, NICKNAME
-  				, REGIST_DATE registDate
+  				,	EMAIL
+  				,	NICKNAME
+  				,	REGIST_DATE registDate
+  				,	SALT
   		FROM	MEMBER
   		WHERE	EMAIL = #{email}
   		AND		PASSWORD = #{password}

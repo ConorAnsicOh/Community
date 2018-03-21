@@ -18,8 +18,22 @@
 		$("#email").keyup(function() {
 			var value = $(this).val();
 			if ( value != "" ) {
-				$(this).removeClass("invalid");
-				$(this).addClass("valid");
+				/* AJAX call (http://localhost:8080/api/exists/eamil) */
+				/* GET방식과 POST방식을 지원하지만 무조건 POST로 던진다.*/
+				/* $.post( "", {}, function(response) {}); AJAX 콜을 하겠다.  */
+				/* email로 오는 value를 가져온다. */
+				$.post( "<c:url value="/api/exists/email"/>", {
+					email : value
+				}, function(response) {
+					if (response.response) {
+						$("#email").removeClass("valid");
+						$("#email").addClass("invalid");
+					}
+					else {
+						$("#email").removeClass("invalid");
+						$("#email").addClass("valid");
+					}
+				});/* AJAX post는 비동기식이다. */
 			}
 			else {
 				$(this).removeClass("valid");
@@ -29,8 +43,18 @@
 		$("#nickname").keyup(function() {
 			var value = $(this).val();
 			if ( value != "" ) {
-				$(this).removeClass("invalid");
-				$(this).addClass("valid");
+				$.post( "<c:url value="/api/exists/nickname"/>", {
+					nickname : value
+				}, function(repNickData) {
+					if(repNickData.repNickData) {
+						$("#nickname").removeClass("valid");
+						$("#nickname").addClass("invalid");
+					}
+					else {
+						$("#nickname").removeClass("invalid");
+						$("#nickname").addClass("valid");						
+					}
+				});
 			}
 			else {
 				$(this).removeClass("valid");
@@ -93,28 +117,65 @@
 				return false;
 			}
 			
-			if ($("#nickname").val() == "") {
-				alert("닉네임을 입력해라.");
-				$("#nickname").focus();
-				/* 클래스명을 셰도어식으로 준다. */
-				$("#nickname").addClass("invalid");
+			if ($("#email").hasClass("invalid")) {
+				alert("작성한 이메일은 사용할 수 없습니다.");
+				$("#email").focus();
 				return false;
+			}/* 안전한 방법이 아니다. */
+			else {
+				$.post( "<c:url value="/api/exists/email"/>", {
+					email : $("#email").val()
+				}, function(response) {
+					if (response.response) {
+						alert("작성한 이메일은 사용 불가");
+						$("#eamil").focus();
+						return false;
+					}
+					
+					if ($("#nickname").val() == "") {
+						alert("닉네임을 입력해라.");
+						$("#nickname").focus();
+						/* 클래스명을 셰도어식으로 준다. */
+						$("#nickname").addClass("invalid");
+						return false;
+					}
+					
+					if ($("#nickname").hasClass("invalid")) {
+						alert("작성한 닉네임은 사용할 수 없습니다.");
+						$("#nickname").focus();
+						return false;
+					}
+					else {
+						$.post( "<c:url value="/api/exists/nickname"/>", {
+							nickname : $("#nickname").val()
+						}, function(repNickData) {
+							if(repNickData.repNickData) {
+								alret("작성한 닉네임은 사용 불가");
+								$("#nickname").focus();
+								return false;
+							}
+							
+							if ($("#password").val() == "") {
+								alert("비밀번호를 입력해라.");
+								$("#password").focus();
+								/* 클래스명을 셰도어식으로 준다. */
+								$("#password").addClass("invalid");
+								return false;
+							}
+							
+							$("#registForm").attr({
+												"method":	"post",
+												"action":	"<c:url value="/regist"/>"
+											}).submit();
+							
+						});
+					}
+					
+					
+					
+				});/* AJAX post는 비동기식이다. */
 			}
-			
-			if ($("#password").val() == "") {
-				alert("비밀번호를 입력해라.");
-				$("#password").focus();
-				/* 클래스명을 셰도어식으로 준다. */
-				$("#password").addClass("invalid");
-				return false;
-			}
-			
-			$("#registForm").attr({
-								"method":	"post",
-								"action":	"<c:url value="/regist"/>"
-							})
-							.submit();
-			
+
 		});
 	});
 
@@ -129,7 +190,6 @@
 		<form:form modelAttribute="registForm">
 			
 			<div>
-				<!-- TODO Email 중복 검사하기 (ajax) -->
 				<input type="email" id="email" name="email" placeholder="Email" value="${registForm.email}"/>
 			</div>
 			<div>

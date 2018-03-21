@@ -1,5 +1,7 @@
 package com.ktds.community.member.web;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletRequest;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ktds.community.constants.Member;
@@ -35,6 +38,31 @@ public class MemberController {
 	
 	public void setCommunityService(CommunityService communityService) {
 		this.communityService = communityService;
+	}
+	
+	@RequestMapping("api/exists/email")
+	@ResponseBody
+	public Map<String, Boolean> apiIsExistsEamil(@RequestParam String email) {
+		
+		boolean isExists = memberService.readCountMemberEmail(email);
+		
+		Map<String, Boolean> response = new HashMap<String, Boolean>();
+		response.put("response", isExists);
+		
+		return response;
+	}
+	
+	@RequestMapping("api/exists/nickname")
+	@ResponseBody
+	public Map<String, Boolean> apiIsExistsNickname(@RequestParam String nickname) {
+		
+		boolean isExists = memberService.readCountMemberNickname(nickname);
+		
+		Map<String, Boolean> response = new HashMap<String, Boolean>();
+		response.put("repNickData", isExists);
+		
+		return response;
+		
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)

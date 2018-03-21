@@ -11,6 +11,8 @@ public class MemberVO {
 	private String nickname;
 	@NotEmpty(message = "Password는 필수 입력 값입니다.")
 	private String password;
+	
+	private String salt;
 
 	private String registDate;
 
@@ -54,4 +56,13 @@ public class MemberVO {
 		this.registDate = registDate;
 	}
 
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
+	
 }
