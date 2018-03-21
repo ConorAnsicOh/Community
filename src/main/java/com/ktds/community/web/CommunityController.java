@@ -31,7 +31,7 @@ import com.ktds.util.DownloadUtil;
 
 import javafx.scene.input.KeyCombination.ModifierValue;
 
-@Controller
+@Controller      
 public class CommunityController {
 
 	private CommunityService communityService;
