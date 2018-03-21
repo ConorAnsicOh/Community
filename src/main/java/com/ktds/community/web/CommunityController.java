@@ -37,7 +37,7 @@ public class CommunityController {
 	private CommunityService communityService;
 
 	public void setCommunityService(CommunityService communityService) {
-		this.communityService = communityService;
+		this.communityService = communityService;   
 	}
 
 	@RequestMapping("/") // 젤 첫화면이 리스트 페이지
