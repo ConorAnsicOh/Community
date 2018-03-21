@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- 		인터페이스의 이름작성 -->
+  <mapper namespace="MemberDao">
+  
+  	<insert id="insertMember" parameterType="MemberVO">
+  		INSERT	INTO	MEMBER	(
+  			ID
+  			,	EMAIL
+  			,	NICKNAME
+  			,	PASSWORD
+  			,	REGIST_DATE
+  		
+  		)
+  		VALUES	(
+  			MEMBER_ID_SEQ.NEXTVAL
+  			,	#{email}
+  			,	#{nickname}
+  			,	#{password}
+  			,	SYSDATE
+  			
+  		)
+  	
+  	</insert>
+  			<!-- MemberVO에있는 email, nickname, password를 넣어라. -->
+  	
+  	<!-- 적어 넣을것. -->
+  	<select id="selectMember" parameterType="MemberVO" resultType="MemberVO">
+  	
+  		SELECT	ID
+  				, EMAIL
+  				, NICKNAME
+  				, REGIST_DATE registDate
+  		FROM	MEMBER
+  		WHERE	EMAIL = #{email}
+  		AND		PASSWORD = #{password}
+  	
+  	</select>
+ 	
+ 	<select id="deleteMember" parameterType="_int">
+ 		DELETE
+ 		FROM MEMBER
+ 		WHERE MEMBER.ID = #{userId}
+ 	</select>
+ 	
+  </mapper>

@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+p, div, a, li, span, td, u, i, input, textarea, b, body{
+	font-size: 12pt;
+	color: #333;
+	font-family:	"맑은 고딕", "맑은고딕", "나눔 고딕", "나눔고딕"ㅣ
+}
+
+
+body {
+	margin: 0px;
+	padding: 0px;
+}
+
+#wrapper {
+	margin: 0 auto;
+	width: 1000px;
+}
+#popUpwrapper {
+	margin: 0 auto;
+	width: 100%;	
+}
+
+h1.title {
+	background-color: #E3E3E3;
+	margin: 0px;
+	padding: 25px;
+	color: #333;
+	margin-bottom: 10px;
+}
+
+table.grid {
+	border-collapse: collapse;/* 경계를 아얘 없애버려서 더 붙게만듬. --경계선 제거-- */
+
+}
+
+table.grid > thead th {
+	background-color: #D3D3D3;
+	padding: 10px;
+	font-size: 14pt;
+}
+
+table.grid > tbody td {
+	padding: 10px;
+}
+
+table.grid > tbody tr:nth-child(odd) {
+	background-color: #ffe5a8;
+}
+
+table.grid > tbody tr > td:nth-child(1) {
+	text-align: center	
+}
+
+table.grid > tbody tr > td:nth-child(3) {
+	text-align: center	
+}
+
+table.grid > tfood {
+	margin-top: 10px;
+}

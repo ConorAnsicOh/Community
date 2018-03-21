@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+input {
+	padding:		10px;
+	font-size:		13pt;
+	width:			400px;
+	margin:			7px;
+	margin-left:	0px;
+	border-radius:	5px;
+	border:			1px solid #eeeeee;
+}
+
+/* 중복검사 틀리면 이쪽으로. */
+input.invalid {
+	background-color: 	#ecb9d1;
+	color: 				#ec869e;
+}
+
+/* 중복검사 맞으면 이쪽으로. */
+input.valid {
+	background-color: 	#a2eca7;
+	color: 				#74a879;
+	
+}

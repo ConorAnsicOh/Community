@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+a {
+	color: #333;
+	text-decoration: none;	
+}
+
+a:HOVER {
+	text-decoration: underline;
+}

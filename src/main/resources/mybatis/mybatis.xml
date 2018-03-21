@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+ 
+ <configuration>
+ 	<!-- 여러 VO파일들을 이곳에 등록하면(configuration안쪽에.) CommunityVO만 입력하면 된다. -->
+ 	<typeAliases>
+ 		<typeAlias type="com.ktds.community.vo.CommunityVO" alias="CommunityVO"/>
+ 		<typeAlias type="com.ktds.community.member.vo.MemberVO" alias="MemberVO"/>
+ 	</typeAliases>
+ 	
+ 	<mappers>
+ 		<mapper resource="com/ktds/community/dao/sql/communityDao.xml"/>
+ 		<mapper resource="com/ktds/community/member/dao/sql/memberDao.xml"/>
+ 	</mappers>
+ </configuration>

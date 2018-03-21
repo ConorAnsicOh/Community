@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+.button {
+	display:			inline-block;
+	border-radius: 		15px;
+	background-color: 	#ecb9d1;
+	color:				#000;
+	padding:			15px 25px 15px 25px;
+	font-size: 			14pt;
+	cursor:				pointer;
+}
+
+/* 반전을 의미한다. */
+.button:HOVER {
+	background-color: 	#FFF;
+	color: 				#ecb9d1;
+	border:				1px solid black;
+	
+}
